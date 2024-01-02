@@ -1,0 +1,1043 @@
+09112018
+- edit tabel trx_procurement
+	ALTER TABLE `trx_procurement`
+	ADD COLUMN `PRC_TERM` CHAR(50) NULL DEFAULT NULL AFTER `PRC_INVOICE`;
+07112018
+- edit tabel chart_of_account
+	ALTER TABLE `chart_of_account`
+	CHANGE COLUMN `COA_DEBIT` `COA_DEBIT` DECIMAL(10,0) NULL DEFAULT NULL AFTER `COA_OWNER`,
+	CHANGE COLUMN `COA_CREDIT` `COA_CREDIT` DECIMAL(10,0) NULL DEFAULT NULL AFTER `COA_DEBIT`,
+	CHANGE COLUMN `COA_SALDO` `COA_SALDO` DECIMAL(10,0) NULL DEFAULT NULL AFTER `COA_CREDIT`;
+23102018
+- edit tabel other_settings
+	ALTER TABLE `other_settings`
+	ADD COLUMN `PRC_COAMAIN` INT(11) NULL DEFAULT NULL AFTER `PRC_COA`,
+	ADD COLUMN `PRC_COAMAINNAME` CHAR(200) NULL DEFAULT NULL AFTER `PRC_COANAME`;
+22102018
+- tabel baru
+CREATE TABLE `bapplog_details` (
+	`DETBALG_ID` INT NOT NULL AUTO_INCREMENT,
+	`BALG_ID` INT NULL,
+	`DETBALG_IMGNAME` VARCHAR(1024) NULL,
+	`DETBALG_IMGPATH` VARCHAR(1024) NULL,
+	`DETBALG_THUMBS` VARCHAR(1024) NULL,
+	PRIMARY KEY (`DETBALG_ID`),
+	CONSTRAINT `FK__trx_bapplog` FOREIGN KEY (`BALG_ID`) REFERENCES `trx_bapplog` (`BALG_ID`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;
+- edit tabel his_bapplog
+	ALTER TABLE `his_bapplog`
+	ADD COLUMN `HISBALG_TIME` TIME NULL DEFAULT NULL AFTER `HISBALG_DATE`;
+18102018
+- Edit tabel trx_giro_in
+	ALTER TABLE `trx_giro_in`
+	ADD COLUMN `COA_ID` INT(11) NULL DEFAULT NULL AFTER `BRANCH_ID`,
+	ADD CONSTRAINT `FK_trx_giro_in_chart_of_account` FOREIGN KEY (`COA_ID`) REFERENCES `chart_of_account` (`COA_ID`);
+- Edit tabel trx_giro_out
+	ALTER TABLE `trx_giro_out`
+	ADD COLUMN `COA_ID` INT(11) NULL DEFAULT NULL AFTER `BRANCH_ID`,
+	ADD CONSTRAINT `FK_trx_giro_out_chart_of_account` FOREIGN KEY (`COA_ID`) REFERENCES `chart_of_account` (`COA_ID`);
+15102018
+- Edit tabel other_settings
+	ALTER TABLE `other_settings`
+	ADD COLUMN `PRC_COASUB` INT(11) NULL DEFAULT NULL AFTER `PRC_COA`,
+	ADD COLUMN `PRC_COASUBNAME` CHAR(200) NULL DEFAULT NULL AFTER `PRC_COANAME`;
+14102018
+- edit tabel trx_procurement
+	ALTER TABLE `trx_procurement`
+	ADD COLUMN `PRC_SUBSTS` CHAR(1) NULL DEFAULT NULL AFTER `PRC_CODE`,
+	ADD COLUMN `PRC_SUBID` INT NULL DEFAULT NULL AFTER `PRC_SUBSTS`,
+	ADD COLUMN `PRC_SUBCODE` CHAR(30) NULL DEFAULT NULL AFTER `PRC_SUBID`;
+08102018
+- edit tabel his_poga
+	ALTER TABLE `his_poga`
+	ADD COLUMN `HISPOGA_TIME` TIME NULL DEFAULT NULL AFTER `HISPOGA_DATE`;
+- edit tabel his_prcga
+	ALTER TABLE `his_prcga`
+	ADD COLUMN `HISPRCGA_TIME` TIME NULL DEFAULT NULL AFTER `HISPRCGA_DATE`;
+- edit tabel his_usgga
+	ALTER TABLE `his_usgga`
+	ADD COLUMN `HISUSGGA_TIME` TIME NULL DEFAULT NULL AFTER `HISUSGGA_DATE`;
+30092018
+- edit tabel his_giroout
+	ALTER TABLE `his_giroout`
+	ADD COLUMN `HISGRO_TIME` TIME NULL DEFAULT NULL AFTER `HISGRO_DATE`;
+- edit tabel his_giroin
+	ALTER TABLE `his_giroin`
+	ADD COLUMN `HISGRIN_TIME` TIME NULL DEFAULT NULL AFTER `HISGRIN_DATE`;
+28092018
+- edit tabel appr_cost_det
+	ALTER TABLE `appr_cost_det`
+	ADD COLUMN `CSTDT_PPN` CHAR(1) NULL DEFAULT NULL AFTER `CSTDT_CODE`,
+	ADD COLUMN `CSTDT_PPH` CHAR(1) NULL DEFAULT NULL AFTER `CSTDT_PPN`,
+	ADD COLUMN `CSTDT_PPNAMOUNT` BIGINT NULL DEFAULT NULL AFTER `CSTDT_PPH`,
+	ADD COLUMN `CSTDT_PPHAMOUNT` BIGINT NULL DEFAULT NULL AFTER `CSTDT_PPNAMOUNT`;
+25092018
+- edit tabel his_cashout
+	ALTER TABLE `his_cashout`
+	ADD COLUMN `HISCSHO_TIME` TIME NULL DEFAULT NULL AFTER `HISCSHO_DATE`;
+- edit tabel his_bankin
+	ALTER TABLE `his_bankin`
+	ADD COLUMN `HISBNK_TIME` TIME NULL DEFAULT NULL AFTER `HISBNK_DATE`;
+- edit tabel his_bankout
+	ALTER TABLE `his_bankout`
+	ADD COLUMN `HISBNKO_TIME` TIME NULL DEFAULT NULL AFTER `HISBNKO_DATE`;
+20092018
+- Edit tabel invoice type
+	ALTER TABLE `invoice_type`
+	ADD COLUMN `BRANCH_ID` INT(11) NOT NULL DEFAULT '0' AFTER `INC_ID`,
+	ADD CONSTRAINT `FK_invoice_type_master_branch` FOREIGN KEY (`BRANCH_ID`) REFERENCES `master_branch` (`BRANCH_ID`);
+- Edit tabel his_cashin
+	ALTER TABLE `his_cashin`
+	ADD COLUMN `HISCHIN_TIME` TIME NULL DEFAULT NULL AFTER `HISCHIN_DATE`;
+19092018
+- Edit tabel his_inv
+	ALTER TABLE `his_inv`
+	ADD COLUMN `HISINV_TIME` TIME NULL DEFAULT NULL AFTER `HISINV_DATE`;
+18092018
+- Edit tabel his_bapp
+	ALTER TABLE `his_bapp`
+	ADD COLUMN `HISBAPP_TIME` TIME NULL DEFAULT NULL AFTER `HISBAPP_DATE`;
+	ALTER TABLE `his_po`
+	ADD COLUMN `HISPO_TIME` TIME NULL DEFAULT NULL AFTER `HISPO_DATE`;
+	ALTER TABLE `his_prc`
+	ADD COLUMN `HISPRC_TIME` TIME NULL DEFAULT NULL AFTER `HISPRC_DATE`;
+17092018
+- Edit tabel his_approvalbill
+	ALTER TABLE `his_approvalbill`
+	ADD COLUMN `HISAPPR_TIME` TIME NULL DEFAULT NULL AFTER `HISAPPR_DATE`;
+
+15092018
+- Edit tabel other_settings
+	ALTER TABLE `other_settings`
+	ADD COLUMN `BRANCH_ID` INT(11) NOT NULL DEFAULT '0' AFTER `OS_ID`,
+	ADD CONSTRAINT `FK_other_settings_master_branch` FOREIGN KEY (`BRANCH_ID`) REFERENCES `master_branch` (`BRANCH_ID`);
+13092018
+- Edit tabel coa
+	ALTER TABLE `chart_of_account`
+	ADD COLUMN `BRANCH_ID` INT NULL AFTER `PAR_ID`,
+	ADD CONSTRAINT `FK_chart_of_account_master_branch` FOREIGN KEY (`BRANCH_ID`) REFERENCES `master_branch` (`BRANCH_ID`);
+31082018
+- Edit tabel master_goods
+	ALTER TABLE `master_goods`
+	CHANGE COLUMN `GD_PRICE` `GD_PRICE` DECIMAL(10,2) NULL DEFAULT NULL AFTER `GD_MEASURE`;
+	ALTER TABLE `po_details`
+	CHANGE COLUMN `PODET_SUB` `PODET_SUB` DECIMAL(20,2) NULL DEFAULT NULL AFTER `PODET_QTYUNIT`;
+	ALTER TABLE `prc_details`
+	CHANGE COLUMN `PRCDET_SUB` `PRCDET_SUB` DECIMAL(20,2) NULL DEFAULT NULL AFTER `PRCDET_QTY`;
+	ALTER TABLE `trx_procurement`
+	CHANGE COLUMN `PRC_SUB` `PRC_SUB` DECIMAL(20,2) NULL DEFAULT NULL AFTER `PRC_STS`,
+	CHANGE COLUMN `PRC_GTOTAL` `PRC_GTOTAL` DECIMAL(20,2) NULL DEFAULT NULL AFTER `PRC_COST`;
+
+19082018
+- Edit tabel giroout_record
+	ALTER TABLE `giroout_record`
+	CHANGE COLUMN `GOR_DTSTS` `GOR_DTSTS` CHAR(1) NULL DEFAULT '0' AFTER `GOR_BLCSTS`;
+- Revisi model
+	modified:   application/models/datatables/search/Dt_srchgiroinrec.php
+        	modified:   application/models/datatables/search/Dt_srchgirooutrec.php
+15082018
+- Edit tabel cashin det
+	ALTER TABLE `cashin_det`
+	CHANGE COLUMN `CSHDETIN_AMOUNT` `CSHDETIN_AMOUNT` DECIMAL(18,2) NULL DEFAULT NULL AFTER `CSHINDET_INFO`;
+- Edit tabel cashout_det
+	ALTER TABLE `cashout_det`
+	CHANGE COLUMN `CSHODET_AMOUNT` `CSHODET_AMOUNT` DECIMAL(18,2) NULL DEFAULT NULL AFTER `CSHODET_INFO`;
+- Edit tabel bankin_det
+	ALTER TABLE `bankin_det`
+	CHANGE COLUMN `BNKDET_AMOUNT` `BNKDET_AMOUNT` DECIMAL(18,2) NULL DEFAULT NULL AFTER `BNKDET_INFO`;
+- Edit tabel bankin_trxdet
+	ALTER TABLE `bankin_trxdet`
+	CHANGE COLUMN `BNKTRX_AMOUNT` `BNKTRX_AMOUNT` DECIMAL(18,2) NULL DEFAULT NULL AFTER `BNKTRX_DATE`;
+- Edit tabel bankout_det
+	ALTER TABLE `bankout_det`
+	CHANGE COLUMN `BNKODET_AMOUNT` `BNKODET_AMOUNT` DECIMAL(18,2) NULL DEFAULT NULL AFTER `BNKODET_INFO`;
+- Edit tabel bankout_trxdet
+	ALTER TABLE `bankout_trxdet`
+	CHANGE COLUMN `BNKTRXO_AMOUNT` `BNKTRXO_AMOUNT` DECIMAL(18,2) NULL DEFAULT NULL AFTER `BNKTRXO_DATE`;
+- Edit tabel jou_details
+	ALTER TABLE `jou_details`
+	CHANGE COLUMN `JOUDET_DEBIT` `JOUDET_DEBIT` DECIMAL(18,2) NOT NULL DEFAULT '0' AFTER `COA_ID`,
+	CHANGE COLUMN `JOUDET_CREDIT` `JOUDET_CREDIT` DECIMAL(18,2) NOT NULL DEFAULT '0' AFTER `JOUDET_DEBIT`;
+- Edit muncul decimal untuk nominal di trx kas masuk, kas keluar, bank masuk, bank keluar
+	modified:   application/views/menu/administrator/finance/fin_/trx_bankin.php
+	modified:   application/views/menu/administrator/finance/fin_/trx_bankout.php
+        	modified:   application/views/menu/administrator/finance/fin_/trx_cashin.php
+        	modified:   application/views/menu/administrator/finance/fin_/trx_cashout.php
+
+14082018
+- Edit tabel po_details
+	ALTER TABLE `po_details`
+	CHANGE COLUMN `PODET_QTYUNIT` `PODET_QTYUNIT` DECIMAL(10,2) NULL DEFAULT NULL AFTER `GD_ID`;
+- Edit tabel prc_details
+	ALTER TABLE `prc_details`
+	CHANGE COLUMN `PRCDET_QTY` `PRCDET_QTY` DECIMAL(10,2) NULL DEFAULT NULL AFTER `GD_ID`;
+31072018
+- Tambah kolom di tabel other settings
+ALTER TABLE `other_settings`
+	ADD COLUMN `PRCGA_COASUPPLY` INT NULL DEFAULT NULL AFTER `INV_COANAMEPPN`,
+	ADD COLUMN `PRCGA_COADEBT` INT NULL DEFAULT NULL AFTER `PRCGA_COASUPPLY`,
+	ADD COLUMN `PRCGA_COAPPN` INT NULL DEFAULT NULL AFTER `PRCGA_COADEBT`,
+	ADD COLUMN `PRCGA_COACOST` INT NULL DEFAULT NULL AFTER `PRCGA_COAPPN`,
+	ADD COLUMN `PRCGA_COADISC` INT NULL DEFAULT NULL AFTER `PRCGA_COACOST`,
+	ADD COLUMN `PRCGA_COANAMESUPPLY` CHAR(200) NULL DEFAULT NULL AFTER `PRCGA_COADISC`,
+	ADD COLUMN `PRCGA_COANAMEDEBT` CHAR(200) NULL DEFAULT NULL AFTER `PRCGA_COANAMESUPPLY`,
+	ADD COLUMN `PRCGA_COANAMEPPN` CHAR(200) NULL DEFAULT NULL AFTER `PRCGA_COANAMEDEBT`,
+	ADD COLUMN `PRCGA_COANAMECOST` CHAR(200) NULL DEFAULT NULL AFTER `PRCGA_COANAMEPPN`,
+	ADD COLUMN `PRCGA_COANAMEDISC` CHAR(200) NULL DEFAULT NULL AFTER `PRCGA_COANAMECOST`;
+SELECT `DEFAULT_COLLATION_NAME` FROM `information_schema`.`SCHEMATA` WHERE `SCHEMA_NAME`='mtpd2';
+23072018
+- Update pak rudy s
+	application/views/menu/administrator/finance/print_invoice.php
+	application/views/menu/administrator/finance/print_invoicetax.php
+	application/views/menu/administrator/logistik/po_print.php
+	application/views/menu/administrator/logistik/prc_print.php
+	application/views/menu/administrator/marketing/print_approval.php
+	application/views/menu/administrator/marketing/print_bapp.php
+18072018
+- Update pak rudy s
+	application/controllers/administrator/Finance.php
+	application/controllers/administrator/Showdata.php
+	application/models/datatables/showdata/Dt_showrptaccpay.php
+	application/views/menu/administrator/finance/fin_/dash_report.php
+	application/views/menu/administrator/finance/print_rptaccpay.php
+	application/views/menu/administrator/finance/print_rptaccpaysummary.php
+	application/views/menu/administrator/finance/print_rptaccrcv.php
+	application/views/menu/administrator/finance/print_rptaccrcvsummary.php
+	application/views/menu/administrator/finance/report_accpay.php
+09072018
+- Update pak rudy s
+	application/controllers/administrator/Finance.php
+	application/controllers/administrator/Showdata.php
+	application/models/datatables/showdata/Dt_showrptaccrcv.php
+	application/views/menu/administrator/finance/print_rptaccrcv.php
+	application/views/menu/administrator/finance/print_rptaccrcvsummary.php
+	application/views/menu/administrator/finance/report_accrcv.php
+- Perbaikan cetak invoice
+	modified:   application/views/menu/administrator/finance/print_invoice.php
+        	modified:   application/views/menu/administrator/finance/print_invoicetax.php
+06072018
+- Edit laporan pembelian
+	modified:   application/views/menu/administrator/logistik/print_rptprc.php
+05072018
+- Tambah kolom di tabel other settings untuk akun transaksi pembelian
+	ALTER TABLE `other_settings`
+	ADD COLUMN `PRC_COADISC` INT(11) NULL DEFAULT NULL AFTER `PRC_COAAG`,
+	ADD COLUMN `PRC_COAPPN` INT(11) NULL DEFAULT NULL AFTER `PRC_COADISC`,
+	ADD COLUMN `PRC_COACOST` INT(11) NULL DEFAULT NULL AFTER `PRC_COAPPN`,
+	ADD COLUMN `PRC_COANAMEDISC` CHAR(200) NULL DEFAULT NULL AFTER `PRC_COANAMEAG`,
+	ADD COLUMN `PRC_COANAMEPPN` CHAR(200) NULL DEFAULT NULL AFTER `PRC_COANAMEDISC`,
+	ADD COLUMN `PRC_COANAMECOST` CHAR(200) NULL DEFAULT NULL AFTER `PRC_COANAMEPPN`;
+- Edit fungsi transaksi pembelian
+	modified:   application/controllers/Dashboard.php
+       	modified:   application/controllers/administrator/Logistik.php
+        	modified:   application/views/menu/administrator/dashboard.php
+- Tambah kolom di tabel other settings untuk akun transaksi invoice
+	ALTER TABLE `other_settings`
+	ADD COLUMN `INV_COAPPN` INT NULL DEFAULT NULL AFTER `DEBTGIRO_ACCNAME`,
+	ADD COLUMN `INV_COANAMEPPN` CHAR(200) NULL DEFAULT NULL AFTER `INV_COAPPN`;
+- Edit fungsi transaksi invoice
+	modified:   application/controllers/Dashboard.php
+        	modified:   application/controllers/administrator/Finance.php
+        	modified:   application/views/menu/administrator/dashboard.php
+29062018
+- Update cetak transaksi finance(Pak Rudy S)
+	application/controllers/administrator/Finance.php
+	application/views/menu/administrator/finance/fin_/bk_print.php
+	application/views/menu/administrator/finance/fin_/bk_print_old.php
+	application/views/menu/administrator/finance/fin_/bm_print.php
+	application/views/menu/administrator/finance/fin_/bm_print_old1.php
+	application/views/menu/administrator/finance/fin_/gk_print.php
+	application/views/menu/administrator/finance/fin_/gk_print_old.php
+	application/views/menu/administrator/finance/fin_/gm_print.php
+	application/views/menu/administrator/finance/fin_/gm_print_old.php
+	application/views/menu/administrator/finance/fin_/kk_print.php
+	application/views/menu/administrator/finance/fin_/kk_print_old.php
+	application/views/menu/administrator/finance/fin_/km_print.php
+12062018
+- edit
+	modified:   application/controllers/administrator/Finance.php
+        	modified:   application/models/CRUD/M_finance.php
+        	modified:   application/views/menu/administrator/finance/print_reportcash.php
+        	modified:   application/views/menu/administrator/finance/print_reportdcash.php
+11062018
+- Edit laporan kas
+	modified:   application/controllers/administrator/Finance.php
+        	modified:   application/models/CRUD/M_finance.php
+        	modified:   application/views/menu/administrator/finance/print_reportcash.php
+        	modified:   application/views/menu/administrator/finance/print_reportdcash.php
+08062018
+- Edit Pak Rudy S
+	application/views/menu/administrator/finance/fin_/km_print.php
+	application/views/menu/administrator/finance/fin_/km_print_old.php
+	application/views/menu/administrator/finance/fin_/trx_giroout.php
+	modified:   application/views/menu/administrator/finance/fin_/km_print.php
+07062018
+- Edit fungsi hapus detail giro out agar pencairan giro status tidak cair
+	modified:   application/controllers/administrator/Finance.php
+	modified:   application/controllers/administrator/Master.php
+	modified:   application/controllers/Dashboard.php
+06062018
+- Edit halaman giro out
+	modified:   application/controllers/administrator/Master.php
+       	modified:   application/views/menu/administrator/finance/fin_/trx_giroin.php
+        	modified:   application/views/menu/administrator/finance/fin_/trx_giroout.php
+        	modified:   application/views/menu/administrator/master/branch.php
+- edit tambahan
+	application/controllers/administrator/Finance.php
+	application/models/CRUD/M_finance.php
+	application/views/menu/administrator/finance/fin_/trx_giroin.php
+	application/views/menu/administrator/finance/fin_/trx_giroout.php
+04062018
+- Tambah kolom di tabel master_branch
+	ALTER TABLE `master_branch`
+	ADD COLUMN `BRANCH_LOGO` CHAR(30) NULL DEFAULT NULL AFTER `BRANCH_FAX`;
+- Tambah fungsi logo di master cabang
+	modified:   application/controllers/administrator/Master.php
+        	modified:   application/views/menu/administrator/master/branch.php
+30052018
+- Edit fungsi tampil/sembunyi kas masuk, bank masuk, kas keluar, bank keluar, giro masuk
+ 	application/views/menu/administrator/finance/fin_/trx_bankin.php
+ 	application/views/menu/administrator/finance/fin_/trx_bankout.php
+ 	application/views/menu/administrator/finance/fin_/trx_cashin.php
+ 	application/views/menu/administrator/finance/fin_/trx_cashout.php
+ 	application/views/menu/administrator/finance/fin_/trx_giroin.php
+24052018
+- Edit laporan buku besar tipe 2
+	modified:   application/controllers/administrator/Accounting.php
+       	modified:   application/models/CRUD/M_accounting.php
+       	modified:   application/views/menu/administrator/accounting/print_ledger_t2.php
+- Saldo awal muncul di laporan buku besar
+	modified:   application/controllers/administrator/Accounting.php
+        	modified:   application/models/CRUD/M_accounting.php
+        	modified:   application/views/menu/administrator/accounting/print_ledger_t1.php
+22052018
+- Proses hitung saldo awal
+	modified:   application/models/CRUD/M_accounting.php
+        	modified:   application/views/menu/administrator/accounting/print_ledger_t1.php
+21052018
+- Tambah halaman saldo awal
+	modified:   application/controllers/administrator/Accounting.php
+        	modified:   application/controllers/administrator/Showdata.php
+	application/models/CRUD/M_accounting.php
+        	application/models/datatables/showdata/Dt_saldocoa.php
+        	application/views/menu/administrator/accounting/acc_saldo.php
+        	modified:   application/views/layout/administrator/header.php
+        	modified:   assets/addons/extra.css
+- Tambah fungsi laporan buku besar dengan saldo awal
+	modified:   application/controllers/administrator/Accounting.php
+        	modified:   application/models/CRUD/M_accounting.php
+        	modified:   application/views/menu/administrator/accounting/print_ledger_t1.php
+17052018
+- Perbaikan validasi update user
+	modified:   application/controllers/administrator/Master.php
+- Tambah kolom di tabel other settings
+	ALTER TABLE `other_settings`
+	ADD COLUMN `ACCRCVGIRO_ACC` INT(11) NULL DEFAULT NULL AFTER `NOTAFIN_ACCNAME`,
+	ADD COLUMN `ACCRCVGIRO_ACCNAME` CHAR(200) NULL DEFAULT NULL AFTER `ACCRCVGIRO_ACC`,
+	ADD COLUMN `DEBTGIRO_ACC` INT(11) NULL DEFAULT NULL AFTER `ACCRCVGIRO_ACCNAME`,
+	ADD COLUMN `DEBTGIRO_ACCNAME` CHAR(200) NULL DEFAULT NULL AFTER `DEBTGIRO_ACC`;
+- Perbaikan transaksi pencairan giro masuk
+	modified:   application/controllers/Dashboard.php
+	modified:   application/controllers/administrator/Finance.php
+        	modified:   application/controllers/administrator/Master.php
+        	modified:   application/models/CRUD/M_finance.php
+	modified:   application/views/layout/administrator/header.php
+	modified:   application/views/menu/administrator/dashboard.php
+        	modified:   application/views/menu/administrator/finance/fin_/trx_giroin.php
+15052018
+- Edit transaksi bank masuk dan bank keluar dan tambahan untuk laporan bank
+	modified:   application/controllers/administrator/Finance.php
+        	modified:   application/models/CRUD/M_finance.php
+	modified:   application/views/menu/administrator/finance/fin_/dash_report.php
+        	modified:   application/views/menu/administrator/finance/fin_/trx_bankin.php
+        	modified:   application/views/menu/administrator/finance/fin_/trx_bankout.php
+        	modified:   application/views/menu/administrator/finance/print_reportbank.php
+	application/views/menu/administrator/finance/report_bank.php
+14052018
+- Edit laporan buku besar
+	modified:   application/controllers/administrator/Showdata.php
+        	modified:   application/models/datatables/showdata/Dt_showledger.php
+        	modified:   application/views/menu/administrator/accounting/acc_ledger.php
+        	modified:   application/views/menu/administrator/accounting/print_ledger_t1.php
+- Tambah fungsi export excel di laporan buku kas dan kas harian
+	modified:   application/views/menu/administrator/finance/print_reportcash.php
+        	modified:   application/views/menu/administrator/finance/print_reportdcash.php
+11052018
+- Edit laporan bank
+	modified:   application/controllers/administrator/Finance.php
+        	modified:   application/views/menu/administrator/finance/fin_/dash_report.php
+	application/views/menu/administrator/finance/print_reportbank.php
+        	application/views/menu/administrator/finance/report_bank.php
+09052018
+- Tambah kolom di tabel other_settings
+	ALTER TABLE `other_settings`
+	ADD COLUMN `NOTAFIN_ACC` INT(11) NULL DEFAULT NULL AFTER `PRC_COANAMEAG`,
+	ADD COLUMN `NOTAFIN_ACCNAME` CHAR(200) NULL DEFAULT NULL AFTER `NOTAFIN_ACC`;
+- Perbaikan laporan kas harian
+	modified:   application/controllers/Dashboard.php
+        	modified:   application/controllers/administrator/Finance.php
+        	modified:   application/models/CRUD/M_finance.php
+        	modified:   application/views/menu/administrator/dashboard.php
+        	modified:   application/views/menu/administrator/finance/report_cash.php
+	application/views/menu/administrator/finance/print_reportdcash.php
+- Perbaikan laporan laba rugi
+	modified:   application/views/menu/administrator/accounting/print_profitloss.php
+08052018
+- Perbaikan tampilan laporan Approval
+	modified:   application/controllers/administrator/Marketing.php
+        	modified:   application/controllers/administrator/Showdata.php
+        	modified:   application/models/datatables/showdata/Dt_showrptappr.php
+        	modified:   application/views/menu/administrator/marketing/print_reportappr_t1.php
+        	modified:   application/views/menu/administrator/marketing/report_appr.php
+- Perbaikan laporan buku kas
+	modified:   application/controllers/administrator/Finance.php
+        	modified:   application/controllers/administrator/Searchdata.php
+	application/models/datatables/search/Dt_srchcoa.php
+        	modified:   application/views/layout/administrator/jspack.php
+       	modified:   application/views/menu/administrator/dashboard.php
+        	modified:   application/views/menu/administrator/finance/fin_/dash_report.php
+        	modified:   application/views/menu/administrator/marketing/print_reportappr_t1.php
+        	modified:   application/views/menu/administrator/marketing/report_appr.php
+	application/views/menu/administrator/finance/report_cash.php
+	application/views/menu/administrator/finance/print_reportcash.php
+       	assets/datatables/js/date-dd-MMM-yyyy.js
+07052018
+- Tambah laporan kartu piutang
+	modified:   application/controllers/administrator/Finance.php
+	modified:   application/controllers/administrator/Showdata.php
+	application/models/datatables/showdata/Dt_showrptaccrcv.php
+        	modified:   application/views/menu/administrator/finance/fin_/dash_report.php
+	application/views/menu/administrator/finance/report_accrcv.php
+03052018
+- Tambah fungsi ambil data BL GA untuk detail kas keluar dan bank keluar
+	modified:   application/controllers/administrator/Finance.php
+        	modified:   application/controllers/administrator/Searchdata.php
+        	modified:   application/models/datatables/Dt_srchprcbyid.php
+	application/models/datatables/search/Dt_srchprcgabysupp.php
+        	modified:   application/views/menu/administrator/finance/fin_/trx_bankout.php
+        	modified:   application/views/menu/administrator/finance/fin_/trx_cashout.php
+27042018
+- Tambah fungsi edit, lihat, dan open untuk transaksi PO dan Pembelian GA
+	modified:   application/controllers/administrator/Genaff.php
+        	modified:   application/controllers/administrator/Searchdata.php
+        	modified:   application/models/CRUD/M_gen.php
+	application/models/CRUD/M_genaff.php
+        	application/models/datatables/search/Dt_srchpogabysts.php
+        	application/models/datatables/search/Dt_srchprcgabysts.php
+        	modified:   application/views/menu/administrator/ga/ga_trx_po.php
+        	modified:   application/views/menu/administrator/ga/ga_trx_prc.php
+	modified:   application/views/menu/administrator/finance/fin_/trx_bankout.php
+26042018
+- Edit fungsi simpan user agar tidak bisa simpan username sama
+	modified:   application/controllers/administrator/Master.php
+24042018
+- Tambah kolom di tabel trx_bankout
+	ALTER TABLE `trx_bankout`
+	ADD COLUMN `BNKO_LOC` CHAR(30) NULL DEFAULT NULL AFTER `BNKO_APPR`;
+- Cek fungsi dan halaman bank keluar
+	modified:   application/controllers/administrator/Finance.php
+	modified:   application/controllers/administrator/Searchdata.php
+        	modified:   application/models/CRUD/M_finance.php
+	modified:   application/models/datatables/search/Dt_srchbankoutbysts.php
+        	modified:   application/views/menu/administrator/finance/fin_/trx_bankin.php
+       	modified:   application/views/menu/administrator/finance/fin_/trx_bankout.php
+23042018
+- Perbaiki buku kas tanpa branch
+	UPDATE `mtpd2`.`buku_kas` SET `BRANCH_ID`='1' WHERE  `BRANCH_ID` IS NULL
+- Tambah kolom di tabel trx_bankin
+	ALTER TABLE `trx_bankin`
+	ADD COLUMN `CSTIN_ID` INT(11) NULL DEFAULT NULL AFTER `CUST_ID`,
+	ADD CONSTRAINT `FKBNKIN2` FOREIGN KEY (`CSTIN_ID`) REFERENCES `master_cust_intern` (`CSTIN_ID`);
+- Tambah kolom di tabel buku giro
+	ALTER TABLE `buku_giro`
+	ADD COLUMN `BRANCH_ID` INT(11) NOT NULL AFTER `USER_ID`;
+- Tambah kolom di buku bank
+	ALTER TABLE `buku_bank`
+	ADD COLUMN `BRANCH_ID` INT(11) NOT NULL AFTER `USER_ID`,
+	CHANGE COLUMN `ACC` `ACC` CHAR(200) NOT NULL AFTER `COA_ID`
+- Cek fungsi dan halaman bank masuk
+	modified:   application/controllers/administrator/Finance.php
+        	modified:   application/controllers/administrator/Searchdata.php
+        	modified:   application/models/CRUD/M_finance.php
+       	modified:   application/models/datatables/search/Dt_srchbankinbysts.php
+        	modified:   application/views/menu/administrator/finance/fin_/trx_bankin.php
+20042018
+- Perbaiki pencarian klien untuk kas masuk
+	modified:   application/controllers/administrator/Searchdata.php
+        	modified:   application/models/datatables/Dt_srchcust.php
+        	modified:   application/views/menu/administrator/finance/fin_/trx_bankin.php
+        	modified:   application/views/menu/administrator/finance/fin_/trx_cashin.php
+	application/models/datatables/search/Dt_srchcustall.php
+18042018
+- Cek fungsi dan halaman kas keluar
+	modified:   application/controllers/administrator/Finance.php
+        	modified:   application/controllers/administrator/Searchdata.php
+        	modified:   application/models/CRUD/M_finance.php
+        	modified:   application/models/datatables/search/Dt_srchcashoutbysts.php
+	modified:   application/views/menu/administrator/finance/fin_/trx_cashout.php
+	modified:   application/views/menu/administrator/finance/fin_/trx_cashin.php
+17042018
+- Tambah fungsi lihat di transaksi pembelian logistik
+	modified:   application/controllers/administrator/Searchdata.php
+        	modified:   application/views/menu/administrator/logistik/lgt_trx_prc.php
+- Tambah kolom di tabel trx_cash_in
+	ALTER TABLE `trx_cash_in`
+	ADD COLUMN `CSTIN_ID` INT(11) NULL DEFAULT NULL AFTER `CUST_ID`,
+	ADD CONSTRAINT `FKCSHIN2` FOREIGN KEY (`CSTIN_ID`) REFERENCES `master_cust_intern` (`CSTIN_ID`);
+- Edit kolom tabel buku_kas
+	ALTER TABLE `buku_kas`
+	ALTER `ACC` DROP DEFAULT;
+	ALTER TABLE `buku_kas`
+	CHANGE COLUMN `ACC` `ACC` CHAR(200) NOT NULL AFTER `COA_ID`;
+	ALTER TABLE `buku_kas`
+	ADD COLUMN `BRANCH_ID` INT(11) NULL DEFAULT NULL AFTER `USER_ID`;
+- Cek fungsi dan halaman kas masuk
+	modified:   application/controllers/administrator/Finance.php
+	modified:   application/controllers/administrator/Searchdata.php
+        	modified:   application/models/CRUD/M_finance.php
+	modified:   application/models/datatables/search/Dt_srchcashinbysts.php
+        	modified:   application/views/menu/administrator/finance/fin_/trx_cashin.php
+16042018
+- Tambah kolom di tabel other_settings
+	ALTER TABLE `other_settings`
+	ADD COLUMN `PRC_COAAG` INT(11) NULL DEFAULT NULL AFTER `PRC_COA`,
+	ADD COLUMN `PRC_COANAMEAG` CHAR(200) NULL DEFAULT NULL AFTER `PRC_COANAME`;
+- Tambah fungsi simpan akun HPP dan Hutang Usaha di halaman setting aplikasi
+	modified:   application/controllers/Dashboard.php
+	modified:   application/views/menu/administrator/dashboard.php
+- Tambah fungsi simpan jurnal saat simpan pembelian logistik
+	modified:   application/controllers/administrator/Finance.php
+        	modified:   application/controllers/administrator/Logistik.php
+        	modified:   application/views/menu/administrator/logistik/lgt_trx_prc.php
+- Tambah fungsi simpan jurnal saat simpan pembelian GA
+	modified:   application/controllers/administrator/Genaff.php
+        	modified:   application/views/menu/administrator/ga/ga_trx_prc.php
+13042018
+- Edit fungsi logistik PO dan dropdown chart of account
+	modified:   application/controllers/administrator/Logistik.php
+        	modified:   application/views/menu/administrator/dashboard.php
+       	modified:   application/views/menu/administrator/ga/report_prc.php
+        	modified:   application/views/menu/administrator/logistik/report_po.php
+        	modified:   application/views/menu/administrator/logistik/report_prc.php
+        	modified:   application/views/menu/administrator/permit/permit_approval.php
+        	modified:   application/views/menu/administrator/permit/report_permitappr.php
+12042018
+- Edit accounting
+	modified:   application/views/menu/administrator/accounting/acc_ledger.php
+       	modified:   application/views/menu/administrator/accounting/report_journal.php
+	modified:   application/models/datatables/showdata/Dt_showrptjou.php
+- Edit finance
+	modified:   application/controllers/administrator/Finance.php
+- Edit kode dropdown coa di menu halaman akunting
+	modified:   application/views/menu/administrator/accounting/adj_journal.php
+        	modified:   application/views/menu/administrator/accounting/pay_journal.php
+       	modified:   application/views/menu/administrator/accounting/report_balsheet.php
+        	modified:   application/views/menu/administrator/accounting/report_journal.php
+        	modified:   application/views/menu/administrator/accounting/report_profitloss.php
+        	modified:   application/views/menu/administrator/accounting/report_trialbal.php
+- Buka kolom di transaksi BAPP
+	modified:   application/controllers/administrator/Searchdata.php
+        	modified:   application/views/menu/administrator/marketing/mkt_trx_bapp.php
+- Buka kolom di transaksi PO
+	modified:   application/controllers/administrator/Searchdata.php
+        	modified:   application/views/menu/administrator/logistik/lgt_trx_po.php
+- Tambah kolom di tabel trx_bapp
+	ALTER TABLE `trx_bapp`
+	ADD COLUMN `BAPP_TYPE` VARCHAR(1024) NULL DEFAULT NULL AFTER `BAPP_DOC`;
+- Edit halaman transaksi BAPP
+	modified:   application/controllers/administrator/Marketing.php
+        	modified:   application/views/menu/administrator/marketing/mkt_trx_bapp.php
+        	modified:   application/views/menu/administrator/marketing/print_bapp.php
+11042018
+- Tambah kolom di tabel other_settings
+	ALTER TABLE `other_settings`
+	ADD COLUMN `PRC_COA` INT NULL AFTER `PRINT_BANKINVOICE`;
+	ADD COLUMN `PRC_COANAME` CHAR(200) NULL DEFAULT NULL AFTER `PRC_COA`;
+- Edit other settings halaman dashboard
+	modified:   application/controllers/Dashboard.php
+        	modified:   application/controllers/administrator/Searchdata.php
+       	modified:   application/views/menu/administrator/dashboard.php
+	modified:   application/views/menu/administrator/accounting/acc_journal.php
+- Buka tanggal saat edit approval dan invoice
+	modified:   application/views/menu/administrator/finance/trx_fin_invoice.php
+        	modified:   application/views/menu/administrator/marketing/mkt_trx_approval2.php
+10042018
+- Edit halaman transaksi invoice untuk buka nominal custom
+	modified:   application/controllers/administrator/Finance.php
+        	modified:   application/controllers/administrator/Searchdata.php
+	application/models/datatables/search/Dt_srchapprbyclientbrc.php
+        	modified:   application/views/menu/administrator/dashboard.php
+        	modified:   application/views/menu/administrator/finance/trx_fin_invoice.php
+09042018
+- Tambah fungsi lihat data dan buka input kode dan tanggal transaksi invoice
+	modified:   application/controllers/administrator/Finance.php
+        	modified:   application/controllers/administrator/Searchdata.php
+        	modified:   application/views/menu/administrator/finance/trx_fin_invoice.php
+06042018
+- Tambah tabel trx_bapplog dan his_bapplog
+- Tambah menu BAPP di bagian logistik
+	modified:   application/controllers/administrator/Logistik.php
+	modified:   application/controllers/administrator/Searchdata.php
+        	modified:   application/models/CRUD/M_gen.php
+	modified:   application/models/CRUD/M_logistik.php
+	application/models/datatables/search/Dt_srchbapplogbysts.php
+        	modified:   application/views/layout/administrator/header.php
+	modified:   application/views/layout/administrator/jspack.php
+	application/views/menu/administrator/logistik/lgt_trx_bapp.php
+        	application/views/menu/administrator/logistik/print_bapplog.php
+        	assets/addons/moment-with-locales.js
+05042018
+- Edit tabel trx_approvalbill
+	ALTER TABLE `trx_approvalbill`
+	CHANGE COLUMN `APPR_DISC_PERC1` `APPR_DISC_PERC1` DECIMAL(10,2) NULL DEFAULT NULL AFTER `APPR_BBTAX`,
+	CHANGE COLUMN `APPR_DISC_PERC2` `APPR_DISC_PERC2` DECIMAL(10,2) NULL DEFAULT NULL AFTER `APPR_DISC_PERC1`,
+	CHANGE COLUMN `APPR_PPN_PERC` `APPR_PPN_PERC` DECIMAL(10,2) NULL DEFAULT NULL AFTER `APPR_DISC_SUM2`,
+	CHANGE COLUMN `APPR_PPH_PERC` `APPR_PPH_PERC` DECIMAL(10,2) NULL DEFAULT NULL AFTER `APPR_PPN_PERC`;
+- Edit tabel appr_terms_det
+	ALTER TABLE `appr_terms_det`
+	CHANGE COLUMN `TERMSDET_PERC` `TERMSDET_PERC` DECIMAL(10,2) NULL DEFAULT NULL AFTER `TERMSDET_INFO`,
+	CHANGE COLUMN `TERMSDET_PPN_PERC` `TERMSDET_PPN_PERC` DECIMAL(10,2) NULL DEFAULT NULL AFTER `TERMSDET_BBTAX`,
+	CHANGE COLUMN `TERMSDET_PPH_PERC` `TERMSDET_PPH_PERC` DECIMAL(10,2) NULL DEFAULT NULL AFTER `TERMSDET_PPN_PERC`;
+- Edit halaman transaksi approval untuk akomodasi persentase dengan koma
+	modified:   application/views/menu/administrator/marketing/mkt_trx_approval2.php
+        	modified:   assets/addons/extra.js
+- Edit halaman transaksi approval untuk menghilangkan wajib input beberapa data
+	modified:   application/controllers/administrator/Marketing.php
+        	modified:   application/views/menu/administrator/marketing/mkt_trx_approval2.php
+- Edit pencarian customer
+	application/models/datatables/search/Dt_srchcust.php
+	modified:   application/controllers/administrator/Searchdata.php
+        	modified:   application/views/menu/administrator/marketing/mkt_trx_approval2.php
+	modified:   application/views/menu/administrator/finance/report_invoice.php
+        	modified:   application/views/menu/administrator/finance/trx_fin_invoice.php
+        	modified:   application/views/menu/administrator/marketing/report_appr.php
+        	modified:   application/views/menu/administrator/marketing/report_bapp.php
+        	modified:   application/views/menu/administrator/permit/permit_approval.php
+- Edit table trx_approvalbill
+	ALTER TABLE `trx_approvalbill`
+	CHANGE COLUMN `APPR_HEIGHT` `APPR_HEIGHT` DECIMAL(10,2) NULL DEFAULT NULL AFTER `APPR_INFO`,
+	CHANGE COLUMN `APPR_WIDTH` `APPR_WIDTH` DECIMAL(10,2) NULL DEFAULT NULL AFTER `APPR_HEIGHT`,
+	CHANGE COLUMN `APPR_LENGTH` `APPR_LENGTH` DECIMAL(10,2) NULL DEFAULT NULL AFTER `APPR_WIDTH`,
+	CHANGE COLUMN `APPR_SUMSIZE` `APPR_SUMSIZE` DECIMAL(10,2) NULL DEFAULT NULL AFTER `APPR_LENGTH`;
+04042018
+- Edit fungsi penomoran pada transaksi invoice
+	modified:   application/controllers/administrator/Finance.php
+        	modified:   application/controllers/administrator/Marketing.php
+        	modified:   application/controllers/administrator/Searchdata.php
+        	modified:   application/models/CRUD/M_gen.php
+        	modified:   application/models/datatables/search/Dt_srchinvbysts.php
+        	modified:   application/views/menu/administrator/finance/trx_fin_invoice.php
+        	modified:   application/views/menu/administrator/marketing/mkt_trx_approval2.php
+- Tambah tabel his_budget
+- Tambah kolom di tabel trx_budget
+	ALTER TABLE `trx_budget`
+	ADD COLUMN `BRANCH_ID` INT(11) NULL DEFAULT NULL AFTER `USER_ID`,
+	ADD CONSTRAINT `FKBDG1` FOREIGN KEY (`BRANCH_ID`) REFERENCES `master_branch` (`BRANCH_ID`);
+- Edit fungsi penomoran transaksi budget
+	modified:   application/models/CRUD/M_gen.php
+- Tambah tabel his_poga, his_prcga, his_usgga, his_adjga, his_rtprcga, dan his_rtusgga
+- Tambah kolom di tabel trx_po_ga
+	ALTER TABLE `trx_po_ga`
+	ADD COLUMN `BRANCH_ID` INT(11) NULL DEFAULT NULL AFTER `USER_ID`,
+	ADD CONSTRAINT `FKPOGA1` FOREIGN KEY (`BRANCH_ID`) REFERENCES `master_branch` (`BRANCH_ID`);
+- Tambah kolom di tabel trx_prc_ga
+	ALTER TABLE `trx_prc_ga`
+	ADD COLUMN `BRANCH_ID` INT(11) NULL DEFAULT NULL AFTER `USER_ID`,
+	ADD CONSTRAINT `FKPRCGA1` FOREIGN KEY (`BRANCH_ID`) REFERENCES `master_branch` (`BRANCH_ID`);
+- Tambah kolom di tabel prcga_ret
+	ALTER TABLE `prcga_ret`
+	ADD COLUMN `BRANCH_ID` INT(11) NULL DEFAULT NULL AFTER `USER_ID`,
+	ADD CONSTRAINT `FKRTPRCGA1` FOREIGN KEY (`BRANCH_ID`) REFERENCES `master_branch` (`BRANCH_ID`);
+- Tambah kolom di tabel trx_usage_ga
+	ALTER TABLE `trx_usage_ga`
+	ADD COLUMN `BRANCH_ID` INT(11) NULL DEFAULT NULL AFTER `USER_ID`,
+	ADD CONSTRAINT `FKUSGGA1` FOREIGN KEY (`BRANCH_ID`) REFERENCES `master_branch` (`BRANCH_ID`);
+- Tambah kolom di tabel usage_ga_ret
+	ALTER TABLE `usage_ga_ret`
+	ADD COLUMN `BRANCH_ID` INT(11) NULL DEFAULT NULL AFTER `USER_ID`,
+	ADD CONSTRAINT `FKRTUSGGA1` FOREIGN KEY (`BRANCH_ID`) REFERENCES `master_branch` (`BRANCH_ID`);
+- Tambah kolom di tabel trx_adj_ga
+	ALTER TABLE `trx_adj_ga`
+	ADD COLUMN `BRANCH_ID` INT(11) NULL DEFAULT NULL AFTER `USER_ID`,
+	ADD CONSTRAINT `FKADJGA1` FOREIGN KEY (`BRANCH_ID`) REFERENCES `master_branch` (`BRANCH_ID`);
+- Edit fungsi penomoran semua transaksi logistik GA
+	modified:   application/models/CRUD/M_gen.php
+03042018
+- Edit kolom di tabel cashin_det
+	ALTER TABLE `cashin_det`
+	CHANGE COLUMN `CASHINDET_` `CASHINDET_INVID` CHAR(30) NULL DEFAULT NULL AFTER `COA_ID`;
+- Edit kolom di tabel cashout_det
+	ALTER TABLE `cashout_det`
+	CHANGE COLUMN `CSHODET_CODE` `CSHODET_PRCID` CHAR(30) NULL DEFAULT NULL AFTER `COA_ID`;
+- Edit kolom di tabel bankin_det
+	ALTER TABLE `bankin_det`
+	CHANGE COLUMN `BNKDET_CODE` `BNKDET_INVID` CHAR(30) NULL DEFAULT NULL AFTER `BNK_ID`;
+- Edit kolom di tabel bankout_det
+	ALTER TABLE `bankout_det`
+	CHANGE COLUMN `BNKODET_CODE` `BNKODET_PRCID` CHAR(30) NULL DEFAULT NULL AFTER `COA_ID`;
+- Sembunyikan menu yang tidak digunakan
+	modified:   application/views/layout/administrator/header.php
+	modified:   application/views/menu/administrator/master/permittype.php
+- Tambah tabel his_giroin dan his_giroout
+- Tambah kolom di tabel trx_giro_in
+	ALTER TABLE `trx_giro_in`
+	ADD COLUMN `BRANCH_ID` INT(11) NULL DEFAULT NULL AFTER `USER_ID`,
+	ADD CONSTRAINT `FKGRIN2` FOREIGN KEY (`BRANCH_ID`) REFERENCES `master_branch` (`BRANCH_ID`);
+- Tambah kolom di tabel trx_giro_out
+	ALTER TABLE `trx_giro_out`
+	ADD COLUMN `BRANCH_ID` INT(11) NULL DEFAULT NULL AFTER `USER_ID`,
+	ADD CONSTRAINT `FKGROUT2` FOREIGN KEY (`BRANCH_ID`) REFERENCES `master_branch` (`BRANCH_ID`);
+- Tambah kolom di tabel buku_giro
+	ALTER TABLE `buku_giro`
+	ADD COLUMN `REFF_ID` CHAR(50) NOT NULL AFTER `BANK_ID`;
+- Ganti fungsi penomoran transaksi giro masuk dan giro keluar
+	modified:   application/models/CRUD/M_gen.php
+        	modified:   application/views/layout/administrator/header.php
+       	modified:   application/views/menu/administrator/master/permittype.php
+- Tambah kolom di tabel trx_procurement
+	ALTER TABLE `trx_procurement`
+	ADD COLUMN `BRANCH_ID` INT(11) NULL DEFAULT NULL AFTER `USER_ID`,
+	ADD CONSTRAINT `FKPRC1` FOREIGN KEY (`BRANCH_ID`) REFERENCES `master_branch` (`BRANCH_ID`);
+- Edit fungsi penomoran pada transaksi pembelian
+	modified:   application/controllers/administrator/Searchdata.php
+        	modified:   application/models/CRUD/M_gen.php
+        	modified:   application/models/datatables/search/Dt_srchrtprcbysts.php
+- Tambah kolom di tabel procurement_ret
+	ALTER TABLE `procurement_ret`
+	ADD COLUMN `BRANCH_ID` INT(11) NULL DEFAULT NULL AFTER `USER_ID`,
+	ADD CONSTRAINT `FKRTPRC1` FOREIGN KEY (`BRANCH_ID`) REFERENCES `master_branch` (`BRANCH_ID`);
+- Tambah kolom di tabel trx_usage
+	ALTER TABLE `trx_usage`
+	ADD COLUMN `BRANCH_ID` INT(11) NULL DEFAULT NULL AFTER `USER_ID`,
+	ADD CONSTRAINT `FKUSG2` FOREIGN KEY (`BRANCH_ID`) REFERENCES `master_branch` (`BRANCH_ID`);
+- Tambah kolom di tabel usage_ret
+	ALTER TABLE `usage_ret`
+	ADD COLUMN `BRANCH_ID` INT(11) NULL DEFAULT NULL AFTER `USER_ID`,
+	ADD CONSTRAINT `FKRTUSG1` FOREIGN KEY (`BRANCH_ID`) REFERENCES `master_branch` (`BRANCH_ID`);
+- Tambah kolom di tabel trx_adjustment
+	ALTER TABLE `trx_adjustment`
+	ADD COLUMN `BRANCH_ID` INT(11) NULL DEFAULT NULL AFTER `USER_ID`,
+	ADD CONSTRAINT `FKADJ1` FOREIGN KEY (`BRANCH_ID`) REFERENCES `master_branch` (`BRANCH_ID`);
+- Tambah tabel his_adj
+- Edit fungsi penomoran di transaksi retur pembelian, pemakaian, retur pemakaian, dan penyesuaian logistik
+	modified:   application/controllers/administrator/Searchdata.php
+        	modified:   application/models/CRUD/M_gen.php
+        	modified:   application/models/datatables/search/Dt_srchprcbysts.php
+        	modified:   application/models/datatables/search/Dt_srchrtusgbysts.php
+        	modified:   application/models/datatables/search/Dt_srchusgbysts.php
+- Tambah kolom di tabel trx_permitappr
+	ALTER TABLE `trx_permitappr`
+	ADD COLUMN `BRANCH_ID` INT(11) NULL DEFAULT NULL AFTER `USER_ID`,
+	ADD CONSTRAINT `FKPAPPR3` FOREIGN KEY (`BRANCH_ID`) REFERENCES `master_branch` (`BRANCH_ID`);
+- Edit fungsi penomoran pada transaksi persetujuan ijin
+	modified:   application/controllers/administrator/Searchdata.php
+        	modified:   application/models/CRUD/M_gen.php
+        	modified:   application/models/datatables/search/Dt_srchpapprbysts.php
+02042018
+- Tambah kolom branch di tabel trx_bapp
+	ALTER TABLE `trx_bapp`
+	ADD COLUMN `BRANCH_ID` INT(11) NULL DEFAULT NULL AFTER `USER_ID`,
+	ADD CONSTRAINT `FKBAPP1` FOREIGN KEY (`BRANCH_ID`) REFERENCES `master_branch` (`BRANCH_ID`);
+- Ganti fungsi penomoran transaksi BAPP
+	modified:   application/controllers/administrator/Searchdata.php
+	modified:   application/models/CRUD/M_gen.php
+        	modified:   application/models/datatables/search/Dt_srchbappbysts.php
+- Tambah kolom branch di tabel trx_po
+	ALTER TABLE `trx_po`
+	ADD COLUMN `BRANCH_ID` INT(11) NULL DEFAULT NULL AFTER `USER_ID`,
+	ADD CONSTRAINT `FKPO2` FOREIGN KEY (`BRANCH_ID`) REFERENCES `master_branch` (`BRANCH_ID`);
+- Ganti fungsi penomoran transaksi PO logistik
+	modified:   application/controllers/administrator/Searchdata.php
+       	modified:   application/models/CRUD/M_gen.php
+        	modified:   application/models/datatables/search/Dt_srchpobysts.php
+- Tambah kolom branch di tabel trx_cash_in
+	ALTER TABLE `trx_cash_in`
+	ADD COLUMN `BRANCH_ID` INT(11) NULL DEFAULT NULL AFTER `USER_ID`,
+	ADD CONSTRAINT `FKCSHIN1` FOREIGN KEY (`BRANCH_ID`) REFERENCES `master_branch` (`BRANCH_ID`);
+- Tambah tabel his_cashin
+- Tambah kolom di tabel buku_kas
+	ALTER TABLE `buku_kas`
+	ADD COLUMN `CSH_ID` INT(11) NOT NULL AFTER `CSHBOOK_ID`;
+- Tambah tabel his_cashout
+- Tambah kolom branch di tabel trx_cash_out
+	ALTER TABLE `trx_cash_out`
+	ADD COLUMN `BRANCH_ID` INT(11) NULL DEFAULT NULL AFTER `USER_ID`,
+	ADD CONSTRAINT `FKCSHO1` FOREIGN KEY (`BRANCH_ID`) REFERENCES `master_branch` (`BRANCH_ID`);
+- Ganti fungsi penomoran transaksi kas masuk dan kas keluar
+	modified:   application/controllers/administrator/Finance.php
+        	modified:   application/models/CRUD/M_gen.php
+- Tambah tabel his_bankin dan his_bankout
+- Tambah kolom di tabel trx_bankin
+	ALTER TABLE `trx_bankin`
+	ADD COLUMN `BRANCH_ID` INT(11) NULL DEFAULT NULL AFTER `USER_ID`,
+	ADD CONSTRAINT `FKBNKIN1` FOREIGN KEY (`BRANCH_ID`) REFERENCES `master_branch` (`BRANCH_ID`);
+- Tambah kolom di tabel trx_bankout
+	ALTER TABLE `trx_bankout`
+	ADD COLUMN `BRANCH_ID` INT(11) NULL DEFAULT NULL AFTER `USER_ID`,
+	ADD CONSTRAINT `FKBNKO1` FOREIGN KEY (`BRANCH_ID`) REFERENCES `master_branch` (`BRANCH_ID`);
+- Tambah kolom di tabel buku_bank
+	ALTER TABLE `buku_bank`
+	ADD COLUMN `BNK_ID` INT(11) NOT NULL AFTER `USER_ID`;
+- Ganti fungsi penomoran transaksi bank masuk dan bank keluar
+	modified:   application/controllers/administrator/Finance.php
+        	modified:   application/models/CRUD/M_gen.php
+29032018
+- Tambah kolom branch_id di tabel trx_approvalbill
+	ALTER TABLE `trx_approvalbill`
+	ADD COLUMN `BRANCH_ID` INT(11) NULL DEFAULT NULL AFTER `USER_ID`,
+	ADD CONSTRAINT `FKAPPR1` FOREIGN KEY (`BRANCH_ID`) REFERENCES `master_branch` (`BRANCH_ID`);
+- Ganti Fungsi penomoran transaksi approval
+	modified:   application/controllers/Dashboard.php
+	modified:   application/controllers/administrator/Searchdata.php
+       	modified:   application/models/CRUD/M_gen.php
+        	modified:   application/models/datatables/search/Dt_srchapprbysts.php
+        	modified:   application/views/menu/administrator/dashboard.php
+28032018
+- Fungsi export hanya untuk admin
+	modified:   application/views/menu/administrator/master/bank.php
+        	modified:   application/views/menu/administrator/master/billboard.php
+        	modified:   application/views/menu/administrator/master/branch.php
+        	modified:   application/views/menu/administrator/master/coa.php
+        	modified:   application/views/menu/administrator/master/currency.php
+        	modified:   application/views/menu/administrator/master/customer.php
+        	modified:   application/views/menu/administrator/master/department.php
+        	modified:   application/views/menu/administrator/master/goods.php
+        	modified:   application/views/menu/administrator/master/invtype.php
+        	modified:   application/views/menu/administrator/master/location.php
+        	modified:   application/views/menu/administrator/master/permittype.php
+        	modified:   application/views/menu/administrator/master/person.php
+        	modified:   application/views/menu/administrator/master/salesforce.php
+        	modified:   application/views/menu/administrator/master/supplier.php
+27032018
+- Tambah fungsi export excell data master
+	modified:   application/controllers/administrator/Master.php
+	modified:   application/controllers/administrator/Transaction.php
+	modified:   application/models/CRUD/M_crud.php
+	modified:   application/views/layout/administrator/jspack.php
+	modified:   application/views/menu/administrator/master/bank.php
+	modified:   application/views/menu/administrator/master/billboard.php
+        	modified:   application/views/menu/administrator/master/branch.php
+        	modified:   application/views/menu/administrator/master/coa.php
+        	modified:   application/views/menu/administrator/master/currency.php
+        	modified:   application/views/menu/administrator/master/customer.php
+        	modified:   application/views/menu/administrator/master/department.php
+        	modified:   application/views/menu/administrator/master/goods.php
+        	modified:   application/views/menu/administrator/master/invtype.php
+       	modified:   application/views/menu/administrator/master/location.php
+        	modified:   application/views/menu/administrator/master/permittype.php
+        	modified:   application/views/menu/administrator/master/person.php
+       	modified:   application/views/menu/administrator/master/salesforce.php
+        	modified:   application/views/menu/administrator/master/supplier.php
+	application/views/menu/administrator/master/print_bank.php
+	application/views/menu/administrator/master/print_bb.php
+	application/views/menu/administrator/master/print_branch.php
+        	application/views/menu/administrator/master/print_coa.php
+        	application/views/menu/administrator/master/print_curr.php
+        	application/views/menu/administrator/master/print_cust.php
+        	application/views/menu/administrator/master/print_dept.php
+        	application/views/menu/administrator/master/print_goods.php
+        	application/views/menu/administrator/master/print_gov.php
+        	application/views/menu/administrator/master/print_invt.php
+        	application/views/menu/administrator/master/print_loc.php
+        	application/views/menu/administrator/master/print_patt.php
+        	application/views/menu/administrator/master/print_person.php
+        	application/views/menu/administrator/master/print_plc.php
+        	application/views/menu/administrator/master/print_sales.php
+        	application/views/menu/administrator/master/print_supp.php
+        	application/views/menu/administrator/master/print_user.php
+26032018
+- Tambah fungsi cek hak akses
+	modified:   application/libraries/Authsys.php
+	modified:   application/views/menu/administrator/dashboard.php
+	modified:   application/controllers/Dashboard.php
+	modified:   application/controllers/administrator/Master.php
+	modified:   application/controllers/administrator/Logistik.php
+	modified:   application/controllers/administrator/Marketing.php
+	modified:   application/controllers/administrator/Accounting.php
+	modified:   application/controllers/administrator/Finance.php
+	modified:   application/controllers/administrator/Genaff.php
+	modified:   application/controllers/administrator/Permit.php
+	modified:   application/controllers/administrator/Transaction.php
+23032018
+- Tambah tabel master_menu
+- Tambah tabel group_user
+- Fungsi create dynamic checkbox
+22032018
+- Tambah fungsi ubah password
+	modified:   application/controllers/Dashboard.php
+	modified:   application/views/menu/administrator/dashboard.php
+20032018
+- Edit halaman transaksi persetujuan ijin
+	modified:   application/controllers/administrator/Permit.php
+	modified:   application/controllers/administrator/Searchdata.php
+	modified:   application/models/CRUD/M_gen.php
+	application/models/CRUD/M_permit.php
+	application/models/datatables/search/Dt_srchpapprbysts.php
+	modified:   application/views/menu/administrator/permit/permit_approval.php
+- Tambah tabel his_pappr
+- Edit halaman transaksi invoice
+	modified:   application/controllers/administrator/Finance.php
+	modified:   application/controllers/administrator/Logistik.php
+	modified:   application/controllers/administrator/Permit.php
+	modified:   application/controllers/administrator/Searchdata.php
+	modified:   application/models/CRUD/M_gen.php
+	application/models/CRUD/M_finance.php
+	application/models/datatables/search/Dt_srchinvbysts.php
+	modified:   application/views/menu/administrator/finance/trx_fin_invoice.php	
+- Tambah tabel his_inv
+- Tambah kolom user_id di tabel trx_invoice
+	ALTER TABLE `trx_invoice`
+	ADD COLUMN `USER_ID` INT(11) NULL DEFAULT NULL AFTER `INV_ID`,
+	ADD CONSTRAINT `FK_INV4` FOREIGN KEY (`USER_ID`) REFERENCES `master_user` (`USER_ID`);
+19032018
+- Edit halaman transaksi pemakaian logistik
+	modified:   application/controllers/administrator/Searchdata.php
+	modified:   application/controllers/administrator/Logistik.php
+	modified:   application/views/menu/administrator/logistik/lgt_trx_usage.php
+	application/models/datatables/search/Dt_srchusgbysts.php
+	modified:   application/models/CRUD/M_gen.php
+	modified:   application/models/CRUD/M_logistik.php
+- Edit halaman transaksi retur pemakaian logistik
+	modified:   application/controllers/administrator/Showdata.php
+	modified:   application/controllers/administrator/Logistik.php
+	modified:   application/controllers/administrator/Searchdata.php
+	application/models/datatables/showdata/Dt_showusgtopick.php
+	application/models/datatables/search/Dt_srchrtusgbysts.php
+	modified:   application/models/CRUD/M_gen.php
+	modified:   application/models/CRUD/M_logistik.php
+	modified:   application/views/menu/administrator/logistik/lgt_trx_retusg.php
+- Tambah tabel his_retusg
+16032018
+- Tambah kolom di tabel procurement_ret
+	ALTER TABLE `procurement_ret`
+	ADD COLUMN `RTPRC_TERM` CHAR(30) NULL DEFAULT NULL AFTER `RTPRC_DATE`;
+- Tambah kolom di tabel his_usg
+	ALTER TABLE `his_usg`
+	ADD COLUMN `HISUSG_DATE` DATE NULL DEFAULT NULL AFTER `HISUSG_INFO`;
+15032018
+- Edit halaman transaksi pembelian logistik
+	modified:   application/controllers/administrator/Logistik.php
+	modified:   application/controllers/administrator/Searchdata.php
+	modified:   application/models/CRUD/M_gen.php
+	modified:   application/models/CRUD/M_logistik.php
+	application/models/datatables/search/Dt_srchprcbysts.php
+	modified:   application/views/menu/administrator/logistik/lgt_trx_prc.php
+	modified:   application/views/menu/administrator/logistik/prc_print.php	
+- Tambah kolom di tabel his_prc
+	ALTER TABLE `his_prc`
+	ADD COLUMN `HISPRC_DATE` DATE NULL DEFAULT NULL AFTER `HISPRC_INFO`;
+- Tambah tabel his_retprc
+CREATE TABLE `his_retprc` (
+	`HISRTPRC_ID` INT NOT NULL AUTO_INCREMENT,
+	`RTPRC_ID` INT NULL DEFAULT NULL,
+	`HISRTPRC_STS` CHAR(50) NULL DEFAULT NULL,
+	`HISRTPRC_OLD` CHAR(50) NULL DEFAULT NULL,
+	`HISRTPRC_NEW` CHAR(50) NULL DEFAULT NULL,
+	`HISRTPRC_INFO` VARCHAR(1024) NULL DEFAULT NULL,
+	`HISRTPRC_DATE` DATE NULL DEFAULT NULL,
+	`HISRTPRC_UPCOUNT` CHAR(1) NULL DEFAULT NULL,
+	PRIMARY KEY (`HISRTPRC_ID`),
+	CONSTRAINT `FKRTPRCHIS1` FOREIGN KEY (`RTPRC_ID`) REFERENCES `procurement_ret` (`RTPRC_ID`)
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;
+- Edit halaman transaksi retur pembelian logistik
+	modified:   application/controllers/administrator/Searchdata.php
+	modified:   application/controllers/administrator/Logistik.php
+	modified:   application/views/menu/administrator/logistik/lgt_trx_retprc.php
+	modified:   application/models/CRUD/M_gen.php
+	modified:   application/models/CRUD/M_logistik.php
+	application/models/datatables/search/Dt_srchrtprcbysts.php
+14032018
+- Edit validasi di beberapa halaman master
+	modified:   application/controllers/administrator/Master.php
+	modified:   application/controllers/administrator/Master.php
+	modified:   application/views/menu/administrator/master/location.php
+	modified:   application/views/menu/administrator/master/location.php
+13032018
+- Edit halaman transaksi PO
+	modified:   application/controllers/administrator/Logistik.php
+	modified:   application/controllers/administrator/Searchdata.php
+	modified:   application/models/CRUD/M_logistik.php
+	modified:   application/views/menu/administrator/logistik/lgt_trx_po.php
+	application/models/datatables/search/Dt_srchpobysts.php
+- Tambah kolom di tabel his_po
+	ALTER TABLE `his_po`
+	ADD COLUMN `HISPO_DATE` DATE NULL DEFAULT NULL AFTER `HISPO_INFO`;
+12032018
+- Edit halaman master bank
+	modified:   application/views/menu/administrator/master/bank.php
+	modified:   application/controllers/administrator/Master.php
+	modified:   application/controllers/administrator/Showdata.php
+	modified:   application/views/menu/administrator/marketing/mkt_trx_approval2.php
+- Edit halaman BAPP untuk menambah fungsi histori bapp
+	modified:   application/controllers/administrator/Marketing.php
+	modified:   application/controllers/administrator/Searchdata.php
+	modified:   application/models/CRUD/M_gen.php
+	modified:   application/models/CRUD/M_marketing.php
+	modified:   application/models/datatables/search/Dt_srchappr.php
+	modified:   application/views/menu/administrator/marketing/mkt_trx_bapp.php
+	application/models/datatables/search/Dt_srchbappbysts.php
+- Tambah kolom di tabel his_bapp
+	ALTER TABLE `his_bapp`
+	ADD COLUMN `HISBAPP_DATE` DATE NULL DEFAULT NULL AFTER `HISBAPP_INFO`;
+08032018
+- Edit halaman transaksi approval untuk tambah menu edit dan buka record
+	modified:   application/controllers/administrator/Searchdata.php
+	modified:   application/models/datatables/search/Dt_srchapprbyclient.php
+	modified:   application/views/menu/administrator/marketing/mkt_trx_approval2.php
+	modified:   application/controllers/administrator/Marketing.php
+	modified:   application/models/CRUD/M_gen.php
+	application/models/datatables/search/Dt_srchapprbysts.php
+	application/models/CRUD/M_marketing.php
+- Tambah kolom tanggal di tabel histori approval
+	ALTER TABLE `his_approvalbill`
+	ADD COLUMN `HISAPPR_DATE` DATE NULL DEFAULT NULL AFTER `HISAPPR_INFO`;
+- Tambah kolom di master_bank
+	ALTER TABLE `master_bank`
+	ADD COLUMN `BANK_ACC` CHAR(100) NULL DEFAULT NULL AFTER `BANK_NAME`,
+	ADD COLUMN `BANK_ACCNAME` CHAR(100) NULL DEFAULT NULL AFTER `BANK_ACC`,
+	ADD COLUMN `BANK_PRODTYPE` CHAR(100) NULL DEFAULT NULL AFTER `BANK_ACCNAME`,
+	ADD COLUMN `BANK_BRANCH` VARCHAR(1024) NULL DEFAULT NULL AFTER `BANK_PRODTYPE`,
+	ADD COLUMN `BANK_CURR` CHAR(100) NULL DEFAULT NULL AFTER `BANK_BRANCH`;
+07032018
+- Edit halaman dashboard utama
+	modified:   application/libraries/Authsys.php
+	modified:   application/views/menu/administrator/dashboard.php
+06032018
+- Tambah master customer internal
+- Tambah tabel untuk customer internal
+- Edit halaman master customer untuk tambahan customer internal
+	modified:   application/views/menu/administrator/master/customer.php
+	modified:   application/models/CRUD/M_crud.php
+	modified:   application/models/CRUD/M_dropdown.php
+	modified:   application/controllers/administrator/Master.php
+	modified:   application/controllers/administrator/Showdata.php
+	modified:   application/controllers/administrator/Dropdown.php
+	application/models/datatables/showdata/Dt_custintern.php
+05032018
+- revisi minor bug pada dropdown list di menu master
+	modified:   application/controllers/administrator/Master.php
+	modified:   application/views/menu/administrator/master/bank.php
+	modified:   application/views/menu/administrator/master/coa.php
+	modified:   application/views/menu/administrator/master/customer.php
+	modified:   application/views/menu/administrator/master/goods.php
+	modified:   application/views/menu/administrator/master/supplier.php
+- Tambah Tabel untuk simpan keterangan cetak bank di invoice
+- Tambah fungsi simpan faktur pajak di controllers Finance
+	application/controllers/administrator/Finance.php
+	application/views/menu/administrator/finance/trx_fin_invoice.php
+	application/views/menu/administrator/finance/print_invoice.php
+	application/views/menu/administrator/finance/print_invoicetax.php
+02032018
+- Revisi controller Master
+01032018
+- Tambah kolom NPPKP dan alamat NPWP di master supplier
+- Tambah input nomor NPPKP dan alamat NPWP di halaman master supplier
+- Tambah fungsi simpan dan update nomor NPPKP dan alamat NPWP di controllers Master
+- SUPP_NPWPADD VARCHAR(1024), SUPP_NPPKPCODE CHAR(100)
+- Tambah textarea untuk menampilkan NPWP dan NPPKP customer di halaman invoice
